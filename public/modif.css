@@ -1,0 +1,175 @@
+/* === 1. WARNA & UKURAN UTAMA (ubah di sini dulu) ==== */
+:root {
+  --warna-latar: #faf9f5;        /* latar halaman */
+  --warna-teks: #1f1e1d;         /* warna tulisan */
+  --warna-pesan-user: #e9e6dc;   /* gelembung pesan lu */
+  --warna-aksen: #c96442;        /* warna tombol Kirim */
+  --warna-garis: #d9d6cb;        /* garis dan pinggiran */
+  --warna-error: #c0392b;        /* warna tulisan error */
+
+  --lebar-maks-chat: 720px;      /* lebar maksimal isi chat */
+  --radius-gelembung: 14px;      /* kebulatan gelembung pesan */
+  --ukuran-font: 16px;           /* ukuran tulisan */
+}
+
+/* Mode gelap (otomatis ikut pengaturan Windows) */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --warna-latar: #262624;
+    --warna-teks: #f0eee6;
+    --warna-pesan-user: #3a3935;
+    --warna-garis: #4a4944;
+  }
+}
+
+
+/* === 2. DASAR HALAMAN =============================== */
+* { box-sizing: border-box; }
+
+html, body { overflow: hidden; }
+
+body {
+  margin: 0;
+  height: 100dvh;
+  display: flex;
+  flex-direction: column;
+  background: var(--warna-latar);
+  color: var(--warna-teks);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: var(--ukuran-font);
+}
+
+
+/* === 3. HEADER (judul + tombol Chat baru) ========== */
+#header {
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--warna-garis);
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Tombol Chat baru */
+#tombol-baru {
+  background: none;
+  border: 1px solid var(--warna-garis);
+  color: var(--warna-teks);
+  border-radius: 8px;
+  padding: 4px 10px;
+  cursor: pointer;
+}
+
+
+/* === 4. AREA CHAT (tempat pesan muncul) ============ */
+#area-chat {
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
+  padding: 20px;
+}
+
+#daftar-pesan {
+  max-width: var(--lebar-maks-chat);
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+
+/* === 5. GELEMBUNG PESAN ============================= */
+.pesan {
+  padding: 10px 14px;
+  border-radius: var(--radius-gelembung);
+  line-height: 1.55;
+  max-width: 85%;
+  white-space: pre-wrap;
+}
+
+/* Pesan dari lu (kanan) */
+.pesan-user {
+  background: var(--warna-pesan-user);
+  align-self: flex-end;
+}
+
+/* Pesan dari bot (kiri) */
+.pesan-bot {
+  align-self: flex-start;
+  white-space: normal;
+}
+
+/* Pesan error */
+.pesan-error { color: var(--warna-error); }
+
+
+/* === 6. ISI JAWABAN BOT (markdown dan rumus) ======= */
+.pesan-bot p { margin: 0 0 10px; }
+.pesan-bot ul, .pesan-bot ol { margin: 0 0 10px; padding-left: 22px; }
+
+.pesan-bot pre {
+  background: var(--warna-pesan-user);
+  padding: 12px;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+.pesan-bot code {
+  font-family: ui-monospace, Consolas, monospace;
+  font-size: .92em;
+}
+.pesan-bot :not(pre) > code {
+  background: var(--warna-pesan-user);
+  padding: 2px 5px;
+  border-radius: 5px;
+}
+
+.pesan-bot table { border-collapse: collapse; }
+.pesan-bot th, .pesan-bot td {
+  border: 1px solid var(--warna-garis);
+  padding: 6px 10px;
+}
+
+.pesan-bot .katex-display { overflow-x: auto; overflow-y: hidden; }
+
+
+/* === 7. KOLOM KETIK ================================ */
+#form-kirim { padding: 14px 20px 20px; }
+
+/* Kotak pembungkus (garis bulat di sekeliling) */
+#kotak-input {
+  max-width: var(--lebar-maks-chat);
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  border: 1px solid var(--warna-garis);
+  border-radius: 16px;
+  padding: 8px;
+}
+
+/* Tempat mengetik */
+#kolom-ketik {
+  flex: 1;
+  resize: none;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--warna-teks);
+  font: inherit;
+  max-height: 160px;
+  padding: 6px;
+}
+
+
+/* === 8. TOMBOL KIRIM =============================== */
+#tombol-kirim {
+  background: var(--warna-aksen);
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* Tombol saat sedang menunggu jawaban */
+#tombol-kirim:disabled { opacity: .5; cursor: default; }

@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>JAWA AI</title>
+
+<!-- Library untuk tampilan markdown dan rumus (dimuat dari internet) -->
+<!-- Library untuk tampilan markdown dan rumus (dimuat dari internet) -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
+<script src="https://cdn.jsdelivr.net/npm/marked@12.0.2/marked.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/dompurify@3.1.6/dist/purify.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/contrib/auto-render.min.js"></script>
+
+<!-- Tampilan: semua warna, ukuran, dan gaya ada di modif.css -->
+<link rel="stylesheet" href="modif.css">
+</head>
+<body>
+
+  <!-- 1. HEADER: judul dan tombol Chat baru -->
+  <header id="header">
+    <span id="judul"></span>
+    <button id="tombol-baru" type="button"></button>
+  </header>
+
+  <!-- 2. AREA CHAT: tempat gelembung pesan muncul -->
+  <div id="area-chat">
+    <div id="daftar-pesan"></div>
+  </div>
+
+  <!-- 3. KOLOM KETIK + TOMBOL KIRIM -->
+  <form id="form-kirim">
+    <div id="kotak-input">
+      <textarea id="kolom-ketik" rows="1"></textarea>
+      <button id="tombol-kirim" type="submit"></button>
+    </div>
+  </form>
+
+  <!-- Logika: semua perilaku chat ada di Tampilan.js -->
+  <script src="Tampilan.js"></script>
+</body>
+</html>
